@@ -1,0 +1,76 @@
+//check version
+docker -v
+
+docker run hello-world
+// ใช้เพื่อตรวจสอบว่า docker ทำงานได้ถูกต้องหรือไม่
+
+// ใช้แสดงสถานะ container ที่กำลังทำงานอยู่หรือรันแล้ว
+docker ps --all
+
+//ตรวจสอบรายชื่อ images ที่รันไป
+docker images
+
+docker run busybox ping google.com
+//เป็นการใช้คำสั่งอื่นนอกจาก defualt "sh" เป็นการ overdrive สั่งเข้าไปแทนคำสั่ง defualt
+
+//หยุดการทำงานของ container ผ่าน container_id ที่เป็น Unique ID
+docker stop <container_id>
+
+// ใช้สำหรับดึง image จาก docker hub
+docker pull <image_name>
+
+// สร้าง container จาก image ที่ดึงมาจาก docker hub
+docker create <image_name> ping google.com
+
+// เริ่มต้น container ที่สร้างขึ้น
+docker start <container_id>
+
+// ลบ container ที่ไม่ต้องการ
+docker rm <container_id>
+
+// ใช้สำหรับลบ image ที่ไม่ต้องการ
+docker rmi <image_name>
+
+// ลบข้อมูลที่ไม่จำเป็นทั้งหมด ไม่ควรใช้
+docker system prune
+
+// รัน container จาก image nginx ที่เป็น web server ยอดนิยม ผ่านพอร์ต 80 ของ container ไปยัง พอร์ต 8000 ของโฮสต์
+docker run nginx
+
+// เข้าสู่ shell ของ container ที่กำลังทำงานอยู่
+docker exec -it <container_id> /bin/sh
+
+// แสดงรายการไฟล์ใน directory ปัจจุบัน
+ls
+// ออกจาก shell ของ container
+exit
+
+// เข้าสู่ shell ของ container ที่กำลังทำงานอยู่
+docker exec -it <container_id_or_name> bash
+
+cd /usr/share/nginx/html
+cat index.html
+
+// รัน container จาก image nginx ที่เป็น web server ยอดนิยม ผ่านพอร์ต 80 ของ container ไปยัง พอร์ต 80 ของโฮสต์
+docker run -p 80:80 nginx
+
+// รัน container จาก image nginx และรันใน background
+docker run -d -p 8000:80 nginx
+
+//ดูรายละเอียดของ image
+docker image inspect <image_name>
+
+// ลบ image ที่ไม่ต้องการ
+docker image rm <image_name>|<image_id>
+
+// สร้าง network ใหม่
+docker network create <network_name>
+
+// รัน container จาก image mysql และเชื่อมต่อกับ network ที่สร้างขึ้น
+docker run --name mysql --network wordpress -e MYSQL_ROOT_PASSWORD=1111 -e MYSQL_DATABASE=wordpress_db -e MYSQL_USER=wordpress -e MYSQL_PASSWORD=wordpress -d mysql:5.7
+docker run --name pma --network wordpress -p 8888:80 -e PMA_ARBITRARY=1 -d phpmyadmin/phpmyadmin
+docker run --name wordpress --network wordpress -e WORDPRESS_DB_HOST=mysql:3306 -e WORDPRESS_DB_USER=wordpress -e WORDPRESS_DB_PASSWORD=wordpress -e WORDPRESS_DB_NAME=wordpress_db -p 8000:80 -d wordpress:latest
+docker run -d --name wordpress --network wordpress -p 888:80 -e WORDPRESS_DB_HOST=mysql -e WORDPRESS_DB_USER=wordpress -e WORDPRESS_DB_PASSWORD=wordpress -e WORDPRESS_DB_NAME=wordpress_db wordpress
+
+P
+xpSgXDebhDTvH8-
