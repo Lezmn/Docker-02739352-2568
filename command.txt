@@ -72,5 +72,3 @@ docker run --name pma --network wordpress -p 8888:80 -e PMA_ARBITRARY=1 -d phpmy
 docker run --name wordpress --network wordpress -e WORDPRESS_DB_HOST=mysql:3306 -e WORDPRESS_DB_USER=wordpress -e WORDPRESS_DB_PASSWORD=wordpress -e WORDPRESS_DB_NAME=wordpress_db -p 8000:80 -d wordpress:latest
 docker run -d --name wordpress --network wordpress -p 888:80 -e WORDPRESS_DB_HOST=mysql -e WORDPRESS_DB_USER=wordpress -e WORDPRESS_DB_PASSWORD=wordpress -e WORDPRESS_DB_NAME=wordpress_db wordpress
 
-P
-xpSgXDebhDTvH8-
